@@ -5,6 +5,17 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/sizeguide
       auto-index-creation: true
+  datasource:
+    oracle:
+      url: jdbc:oracle:thin:@pp2db.cx0j3oma32zw.ap-south-1.rds.amazonaws.com:1621/PP2DB
+      username: MPLUATCOM
+      password: Us976TM64BKK
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
   mail:
     host: smtp.gmail.com
     port: 587
@@ -49,7 +60,11 @@ springdoc:
 logging:
   level:
     com.sizeguide: INFO
-    org.springframework.data.mongodb: INFO
+    com.sizeguide.datamigration: DEBUG
+    org.springframework.batch: DEBUG
+    org.springframework.jdbc: DEBUG
+    org.springframework.data.mongodb: DEBUG
+    org.springframework.transaction: DEBUG
 
 app:
   validation:
@@ -58,3 +73,9 @@ app:
   email:
     from: noreply@sizeguide.com
     subject-prefix: "[SizeGuide] "
+
+batch:
+  chunk-size: 100
+
+migration:
+  auto-run: false  # Set to true to run migration automatically on startup
