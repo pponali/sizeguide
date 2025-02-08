@@ -6,6 +6,8 @@ import com.sizeguide.dto.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,46 +30,64 @@ public interface SizeGuideMapper {
         SizeGuideTabularWsData data = new SizeGuideTabularWsData();
         List<UnitData> unitList = new ArrayList<>();
 
-        // Group by unit
-        Map<String, List<SizeGuideDimension>> byUnit = dimensions.stream()
-                .collect(Collectors.groupingBy(SizeGuideDimension::getUnit));
+        // Create CM unit data
+        UnitData cmData = new UnitData();
+        cmData.setUnit("Cm");
+        cmData.setDisplaytext("Cm");
 
-        for (Map.Entry<String, List<SizeGuideDimension>> unitEntry : byUnit.entrySet()) {
-            String unit = unitEntry.getKey();
-            List<SizeGuideDimension> unitDimensions = unitEntry.getValue();
+        // Create Inch unit data
+        UnitData inData = new UnitData();
+        inData.setUnit("In");
+        inData.setDisplaytext("In");
 
-            UnitData unitData = new UnitData();
-            unitData.setUnit(unit);
-            unitData.setDisplaytext(unit.equals("Cms") ? "Cm" : "In");
+        // Group by size
+        Map<String, List<SizeGuideDimension>> bySize = dimensions.stream()
+                .collect(Collectors.groupingBy(SizeGuideDimension::getSize));
 
-            // Group by size
-            Map<String, List<SizeGuideDimension>> bySize = unitDimensions.stream()
-                    .collect(Collectors.groupingBy(SizeGuideDimension::getSize));
+        // Process dimensions for both units
+        List<SizeGuideData> cmSizeGuideList = new ArrayList<>();
+        List<SizeGuideData> inSizeGuideList = new ArrayList<>();
 
-            List<SizeGuideData> sizeGuideList = bySize.entrySet().stream()
-                    .map(sizeEntry -> {
-                        SizeGuideData sizeGuideData = new SizeGuideData();
-                        sizeGuideData.setDimensionSize(sizeEntry.getKey());
+        for (Map.Entry<String, List<SizeGuideDimension>> sizeEntry : bySize.entrySet()) {
+            SizeGuideData cmSizeGuide = new SizeGuideData();
+            SizeGuideData inSizeGuide = new SizeGuideData();
+            
+            cmSizeGuide.setDimensionSize(sizeEntry.getKey());
+            inSizeGuide.setDimensionSize(sizeEntry.getKey());
 
-                        List<DimensionData> dimensionList = sizeEntry.getValue().stream()
-                                .map(dim -> {
-                                    DimensionData dimensionData = new DimensionData();
-                                    dimensionData.setDimension(dim.getDimension());
-                                    dimensionData.setDimensionValue(dim.getValue());
-                                    return dimensionData;
-                                })
-                                .collect(Collectors.toList());
+            List<DimensionData> cmDimensionList = new ArrayList<>();
+            List<DimensionData> inDimensionList = new ArrayList<>();
 
-                        sizeGuideData.setDimensionList(dimensionList);
-                        return sizeGuideData;
-                    })
-                    .collect(Collectors.toList());
+            for (SizeGuideDimension dim : sizeEntry.getValue()) {
+                // CM dimension
+                DimensionData cmDim = new DimensionData();
+                cmDim.setDimension(dim.getDimension());
+                cmDim.setDimensionValue(dim.getValue());
+                cmDimensionList.add(cmDim);
 
-            unitData.setSizeGuideList(sizeGuideList);
-            unitList.add(unitData);
+                // Inch dimension
+                DimensionData inDim = new DimensionData();
+                inDim.setDimension(dim.getDimension());
+                // Convert CM to Inches (divide by 2.54)
+                double inches = Double.parseDouble(dim.getValue()) / 2.54;
+                inDim.setDimensionValue(String.valueOf(Math.round(inches)));
+                inDimensionList.add(inDim);
+            }
+
+            cmSizeGuide.setDimensionList(cmDimensionList);
+            inSizeGuide.setDimensionList(inDimensionList);
+
+            cmSizeGuideList.add(cmSizeGuide);
+            inSizeGuideList.add(inSizeGuide);
         }
 
+        cmData.setSizeGuideList(cmSizeGuideList);
+        inData.setSizeGuideList(inSizeGuideList);
+
+        unitList.add(cmData);
+        unitList.add(inData);
         data.setUnitList(unitList);
+        
         return data;
     }
 }

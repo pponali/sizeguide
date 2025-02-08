@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 @Tag(name = "Size Guide API", description = "API endpoints for managing size guides")
 public class SizeGuideController {
-    private final SizeGuideService sizeGuideService;
+
+    @Autowired
+    private SizeGuideService sizeGuideService;
 
     @PostMapping("/upload")
     @Operation(summary = "Upload size guide excel file", description = "Upload and process size guide data from excel file")

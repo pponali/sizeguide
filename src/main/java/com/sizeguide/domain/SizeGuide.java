@@ -35,6 +35,7 @@ public class SizeGuide {
         PENDING,
         IN_PROGRESS,
         VALIDATED,
-        FAILED
+        FAILED,
+        SUCCESS
     }
 }

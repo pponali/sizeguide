@@ -8,9 +8,11 @@ import com.sizeguide.repository.SizeGuideRepository;
 import com.sizeguide.service.EmailService;
 import com.sizeguide.service.S3Service;
 import com.sizeguide.service.SizeGuideService;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -26,14 +28,20 @@ import java.util.UUID;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
+
+@NoArgsConstructor
 public class SizeGuideServiceImpl implements SizeGuideService {
 
-    private final SizeGuideRepository sizeGuideRepository;
-    private final MongoTemplate mongoTemplate;
-    private final SizeGuideMapper sizeGuideMapper;
-    private final EmailService emailService;
-    private final S3Service s3Service;
+    @Autowired
+    private  SizeGuideRepository sizeGuideRepository;
+    @Autowired
+    private  MongoTemplate mongoTemplate;
+    @Autowired
+    private  SizeGuideMapper sizeGuideMapper;
+   // @Autowired
+   // private  EmailService emailService;
+    @Autowired
+    private  S3Service s3Service;
 
     @Override
     public String uploadSizeGuideExcel(MultipartFile file) {
@@ -75,7 +83,12 @@ public class SizeGuideServiceImpl implements SizeGuideService {
     @Override
     public Optional<SizeGuideTabularWsDTO> getSizeGuide(String sizeGuideId) {
         return sizeGuideRepository.findBySizeGuideId(sizeGuideId)
-                .map(sizeGuideMapper::toDto);
+                .map(sizeGuide -> {
+                    if (sizeGuide.getValidationStatus() == null) {
+                        sizeGuide.setValidationStatus(SizeGuide.ValidationStatus.SUCCESS);
+                    }
+                    return sizeGuideMapper.toDto(sizeGuide);
+                });
     }
 
     @Override

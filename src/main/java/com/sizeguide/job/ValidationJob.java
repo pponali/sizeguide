@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class ValidationJob implements Job {
 
     private final SizeGuideService sizeGuideService;
-    private final EmailService emailService;
+    //private final EmailService emailService;
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -51,7 +51,7 @@ public class ValidationJob implements Job {
                 }
                 
                 sizeGuideService.save(sg);
-                emailService.sendValidationResultEmail(sg.getSizeGuideId(), errors);
+                //emailService.sendValidationResultEmail(sg.getSizeGuideId(), errors);
             }
         } catch (Exception e) {
             log.error("Error in validation job", e);
