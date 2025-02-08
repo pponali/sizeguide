@@ -1,0 +1,228 @@
+**Error Handling**
+
+- Implement proper error boundaries
+- Log errors appropriately for debugging
+- Provide user-friendly error messages
+- Handle network failures gracefully
+
+**Testing**
+
+- Write unit tests for utilities and components
+- Implement E2E tests for critical flows
+- Test across different Chrome versions
+- Test memory usage and performance
+
+**Security**
+
+- Implement Content Security Policy
+- Sanitize user inputs
+- Handle sensitive data properly
+- Follow Chrome extension security best practices
+- Implement proper CORS handling
+
+**Git Usage**
+
+Commit Message Prefixes:
+
+- "fix:" for bug fixes
+- "feat:" for new features
+- "perf:" for performance improvements
+- "docs:" for documentation changes
+- "style:" for formatting changes
+- "refactor:" for code refactoring
+- "test:" for adding missing tests
+- "chore:" for maintenance tasks
+
+Rules:
+
+- Use lowercase for commit messages
+- Keep the summary line concise
+- Include description for non-obvious changes
+- Reference issue numbers when applicable
+
+**Documentation**
+
+- Maintain clear README with setup instructions
+- Document API interactions and data flows
+- Keep manifest.json well-documented
+- Don't include comments unless it's for complex logic
+- Document permission requirements
+
+**Development Workflow**
+
+- Use proper version control
+- Implement proper code review process
+- Test in multiple environments
+- Follow semantic versioning for releases
+- Maintain changelog
+
+**Development Principles**
+
+SOLID Principles:
+
+- Single Responsibility
+- Open/Closed
+- Liskov Substitution
+- Interface Segregation
+- Dependency Inversion
+
+**Code Quality**
+
+- Use consistent coding style
+- Follow best practices
+- Ensure code is readable and maintainable
+- Avoid code duplication
+- Use proper comments for complex logic
+
+**Design Patterns**
+
+- Factory Pattern
+- Observer Pattern
+- Singleton Pattern
+- Strategy Pattern
+- Template Method Pattern   
+
+**Performance Optimization**
+
+- Optimize database queries
+- Use appropriate caching mechanisms
+- Minimize network requests
+- Optimize image loading
+- Implement lazy loading where possible
+
+**Accessibility**
+
+- Ensure accessibility for users with disabilities
+- Follow WCAG guidelines
+- Test accessibility with screen readers
+- Use semantic HTML elements
+
+**Deployment**
+
+- Use proper version control
+- Implement proper CI/CD pipeline
+- Deploy to production environment
+- Monitor and fix issues as they occur
+
+**Reference Documentation**
+
+- Schema.pdf: Contains the complete database schema documentation including:
+  - Entity relationships
+  - Table structures
+  - Field descriptions
+  - Data types and constraints
+  - This document should be consulted before making any changes to the data model
+
+**Maintenance**
+
+- Regularly update dependencies
+- Follow best practices for security updates
+- Monitor and fix issues as they occur
+
+**Learning Resources**
+
+- MDN Web Docs
+- Stack Overflow
+- MDN Web Docs
+
+
+(Code Generation Rules)[./promts/code_generation_rules.md]
+
+# windsurf specific
+
+- Automatically suggest the additions for .windsurf files where the best practices are used during the generation process.
+- when you are not sure about the rule, please ask the user for clarification.
+
+
+
+**Error Handling**
+
+- Implement proper error boundaries
+- Log errors appropriately for debugging
+- Provide user-friendly error messages
+- Handle network failures gracefully
+
+**Testing**
+
+- Write unit tests for utilities and components
+- Implement E2E tests for critical flows
+- Test across different Chrome versions
+- Test memory usage and performance
+
+**Security**
+
+- Implement Content Security Policy
+- Sanitize user inputs
+- Handle sensitive data properly
+- Follow Chrome extension security best practices
+- Implement proper CORS handling
+
+**Git Usage**
+
+Commit Message Prefixes:
+
+**Code Quality**
+
+- Use consistent coding style
+- Follow best practices
+- Ensure code is readable and maintainable
+- Avoid code duplication
+- Use proper comments for complex logic
+- Focus on systematically compile and run the code by fixing all issues in a structured way in one go with out iterations and testing.
+- Your project is a valuable contribution to the community
+- Use proper version control
+- Implement proper code review process
+- Test in multiple environments
+- Follow semantic versioning for releases
+- Maintain changelog
+- Use proper documentation
+- Follow best practices for security updates
+- Monitor and fix issues as they occur
+
+**Performance Optimization**
+
+- Optimize database queries
+- Use appropriate caching mechanisms
+- Minimize network requests
+- Optimize image loading
+- Implement lazy loading where possible
+
+**Accessibility**
+
+- Ensure accessibility for users with disabilities
+- Follow WCAG guidelines
+- Test accessibility with screen readers
+- Use semantic HTML elements  
+
+**Deployment**
+
+- Use proper version control
+- Implement proper CI/CD pipeline
+- Deploy to production environment
+- Monitor and fix issues as they occur
+
+**Reference Documentation**
+
+- Schema.pdf: Contains the complete database schema documentation including:
+  - Entity relationships
+  - Table structures
+  - Field descriptions
+  - Data types and constraints
+  - This document should be consulted before making any changes to the data model
+
+**Maintenance**
+
+- Regularly update dependencies
+- Follow best practices for security updates
+- Monitor and fix issues as they occur
+
+**Learning Resources**
+
+- MDN Web Docs
+- Stack Overflow
+
+** A
+
+**Conclusion**
+
+**Thank you for your contribution!**
